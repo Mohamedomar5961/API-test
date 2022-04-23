@@ -15,16 +15,18 @@ const favoritesRoute = require("./routes/favorites");
 const cartRoute = require("./routes/cart");
 
 //middleware
-app.use("/", postsRoute);
+app.use("/posts", postsRoute);
 app.use("/favorites", favoritesRoute);
 app.use("/cart", cartRoute);
 
 //ROUTES
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
 //connect to DB
-mongoose.connect(
-  "mongodb+srv://boyboy55:wolfteam@cluster0.ytvrc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  () => console.log("connected to DB")
+mongoose.connect(process.env.DB_CONNECTION, () =>
+  console.log("connected to DB")
 );
 
 //How to we start listening for the server?
